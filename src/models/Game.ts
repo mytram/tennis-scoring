@@ -24,13 +24,21 @@ const newGameRecord = (): GameRecord => ({
   score: 0
 });
 
+type GameCtorProps = {
+  tieBreak: boolean;
+};
+
 class Game {
   records: Record<GameSide, GameRecord>;
   deuce: boolean;
   advantage: GameSide | null;
   winner: GameSide | null;
+  // The concepts of tieBreak exists in two places.
+  // One is with MatchSet to decide if the next game is a tiebreak,
+  // and data integrity checks.
+  tieBreak: boolean;
 
-  constructor() {
+  constructor(props?: GameCtorProps) {
     this.records = {
       [GameSide.First]: newGameRecord(),
       [GameSide.Second]: newGameRecord()
@@ -38,6 +46,7 @@ class Game {
     this.deuce = false;
     this.advantage = null;
     this.winner = null;
+    this.tieBreak = props ? props.tieBreak : false;
   }
 }
 

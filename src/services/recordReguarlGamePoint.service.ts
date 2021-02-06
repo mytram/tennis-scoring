@@ -19,7 +19,7 @@ const wonAdvantage = (winRecord: GameRecord, lossRecord: GameRecord) =>
   winRecord.pointTally >= REGULAR_GAME_DEUCE_POINT &&
   lossRecord.pointTally >= REGULAR_GAME_DEUCE_POINT &&
   winRecord.pointTally - lossRecord.pointTally ==
-  REGULAR_GAME_ADVANTAGE_POINT_DIFF;
+    REGULAR_GAME_ADVANTAGE_POINT_DIFF;
 
 // Functional interface
 type Props = {

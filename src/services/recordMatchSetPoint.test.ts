@@ -34,8 +34,21 @@ describe('recordMatchSetPoint', () => {
     winFiveGames(matchSet, GameSide.First);
     winOneGame(matchSet, GameSide.First);
 
-    expect(matchSet.score[GameSide.First]).toBe(6);
-    expect(matchSet.score[GameSide.Second]).toBe(0);
+    expect(matchSet.scores[GameSide.First]).toBe(6);
+    expect(matchSet.scores[GameSide.Second]).toBe(0);
+
+    expect(matchSet.winner).toBe(GameSide.First);
+  });
+
+  it('does nothing after the match set has a winner', () => {
+    const matchSet = new MatchSet();
+
+    winFiveGames(matchSet, GameSide.First);
+    winOneGame(matchSet, GameSide.First);
+
+    expect(matchSet.winner).toBe(GameSide.First);
+
+    winOneGame(matchSet, GameSide.First);
 
     expect(matchSet.winner).toBe(GameSide.First);
   });
@@ -48,13 +61,13 @@ describe('recordMatchSetPoint', () => {
 
     winOneGame(matchSet, GameSide.First);
 
-    expect(matchSet.score[GameSide.First]).toBe(6);
-    expect(matchSet.score[GameSide.Second]).toBe(5);
+    expect(matchSet.scores[GameSide.First]).toBe(6);
+    expect(matchSet.scores[GameSide.Second]).toBe(5);
 
     winOneGame(matchSet, GameSide.First);
 
-    expect(matchSet.score[GameSide.First]).toBe(7);
-    expect(matchSet.score[GameSide.Second]).toBe(5);
+    expect(matchSet.scores[GameSide.First]).toBe(7);
+    expect(matchSet.scores[GameSide.Second]).toBe(5);
 
     expect(matchSet.winner).toBe(GameSide.First);
   });
@@ -67,21 +80,19 @@ describe('recordMatchSetPoint', () => {
 
     winOneGame(matchSet, GameSide.First);
 
-    expect(matchSet.score[GameSide.First]).toBe(6);
-    expect(matchSet.score[GameSide.Second]).toBe(5);
+    expect(matchSet.scores[GameSide.First]).toBe(6);
+    expect(matchSet.scores[GameSide.Second]).toBe(5);
 
     winOneGame(matchSet, GameSide.Second);
 
-    expect(matchSet.score[GameSide.First]).toBe(6);
-    expect(matchSet.score[GameSide.Second]).toBe(6);
-
-    expect(matchSet.isTieBreak()).toBe(true);
+    expect(matchSet.scores[GameSide.First]).toBe(6);
+    expect(matchSet.scores[GameSide.Second]).toBe(6);
 
     // 7 points to win a tiebreak
     winTieBreak(matchSet, GameSide.Second);
 
-    expect(matchSet.score[GameSide.First]).toBe(6);
-    expect(matchSet.score[GameSide.Second]).toBe(7);
+    expect(matchSet.scores[GameSide.First]).toBe(6);
+    expect(matchSet.scores[GameSide.Second]).toBe(7);
 
     expect(matchSet.winner).toBe(GameSide.Second);
   });

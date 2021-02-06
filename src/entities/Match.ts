@@ -29,14 +29,16 @@ class Match {
 
   pointWonBy(player: string) {
     const wonBy = this.playerToGameSideMap[player];
-    if (!wonBy) throw `Player #{player} is not found`;
+    // For the exercise, assume all data is correct!
+    // if (!wonBy) throw `Player #{player} is not found`;
 
     this.recordMatchSetPoint.call(wonBy);
   }
 
   score() {
     const scores = [
-      `${this.matchSet.score[GameSide.First]}-${this.matchSet.score[GameSide.Second]
+      `${this.matchSet.scores[GameSide.First]}-${
+        this.matchSet.scores[GameSide.Second]
       }`,
       this.gameScore()
     ].filter(s => s !== '');
@@ -59,8 +61,9 @@ class Match {
       return 'Deuce';
     }
 
-    const gameScore = `${game.records[GameSide.First].score}-${game.records[GameSide.Second].score
-      }`;
+    const gameScore = `${game.records[GameSide.First].score}-${
+      game.records[GameSide.Second].score
+    }`;
 
     // A little quirk in the sample test.
     if (gameScore == '0-0') return '';
